@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Venue - Restaurant</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Playfair+Display:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+     <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #fff;
+        }
+        
+        /* Navigation */
+        .navbar {
+            padding: 25px 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .nav-link {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            margin: 0 15px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #fff !important;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Logo */
+        .navbar-brand {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #d4af37 !important;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-sub {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #fff !important;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        
+        /* Custom Toggler Icon */
+        .navbar-toggler {
+            border: none;
+            padding: 0;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: none;
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+        
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: #d4af37;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-toggler-icon::before {
+            top: 6px;
+        }
+        
+        .navbar-toggler-icon::after {
+            bottom: 6px;
+        }
+        
+        .navbar-toggler-icon.middle {
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: #d4af37;
+            top: 11px;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+            transform: rotate(45deg);
+            top: 11px;
+        }
+        
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+            transform: rotate(-45deg);
+            bottom: 11px;
+        }
+        
+        .navbar-toggler[aria-expanded="true"] .middle {
+            opacity: 0;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .title {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 72px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: #d4af37;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .divider {
+            width: 100px;
+            height: 2px;
+            background-color: #d4af37;
+            margin: 30px auto;
+        }
+        
+        /* Menu Items Section */
+        .menu-section {
+            padding: 80px 0;
+            background-color: #111;
+        }
+        
+        .menu-item {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+        
+        .menu-ingredients {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 16px;
+            color: #aaa;
+        }
+        
+        /* Reservation Box */
+        .reservation-box {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            padding: 15px 30px;
+            display: inline-block;
+            background-color: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .reservation-box:hover {
+            background-color: #d4af37;
+            color: #000;
+        }
+        .menu-item-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    border: 3px solid #d4af37;
+}
+
+.menu-item-img:hover {
+    transform: scale(1.03);
+}
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .title {
+                font-size: 56px;
+            }
+            
+            .navbar-brand {
+                font-size: 24px;
+            }
+            
+            .logo-sub {
+                font-size: 10px;
+                letter-spacing: 3px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 42px;
+            }
+            
+            .hero-section {
+                height: 80vh;
+            }
+            
+            .menu-title {
+                font-size: 20px;
+            }
+        }
+       /* Feliciano Section */
+.feliciano-section {
+    padding: 80px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    position: relative;
+}
+
+.feliciano-section h2 {
+    color: #000;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.feliciano-section h2:after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background-color: #d4af37;
+    bottom: 0;
+    left: 0;
+}
+
+.feliciano-section h5 {
+    color: #d4af37;
+}
+
+.feliciano-section img {
+    transition: transform 0.3s ease;
+}
+
+.feliciano-section img:hover {
+    transform: scale(1.02);
+}
+
+.ephesis-text {
+    font-family: 'Ephesis', cursive;
+    font-weight: 400;
+    color: rgba(212, 175, 55, 0.2);
+    white-space: nowrap;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .feliciano-section {
+        padding: 60px 0;
+    }
+    
+    .feliciano-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    .ephesis-text {
+        font-size: 4rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .ephesis-text {
+        font-size: 3rem !important;
+    }
+}
+        /* Services Section */
+.services-section {
+    padding: 80px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.service-card {
+    background-color: #fff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.service-card h4 {
+    color: #000;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.service-card h4:after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background-color: #d4af37;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.service-card p {
+    color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .services-section {
+        padding: 60px 0;
+    }
+    
+    .service-card {
+        margin-bottom: 30px;
+    }
+}
+.service-icon {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1);
+}
+/* Menu Section */
+/* Menu Section */
+.menu-section {
+    padding: 80px 0;
+}
+
+.menu-item-box {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.menu-item-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.btn-outline-dark {
+    border-color: #333;
+    color: #333;
+    transition: all 0.3s ease;
+    padding: 5px 15px;
+    font-size: 14px;
+}
+
+.btn-outline-dark:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .menu-item-box {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-section {
+        padding: 60px 0;
+    }
+    
+    .menu-item-box {
+        margin-bottom: 15px;
+    }
+}
+/* Compact Menu Section */
+.compact-menu-section {
+    padding: 80px 0;
+}
+
+.menu-column {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.menu-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: black;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .compact-menu-section {
+        padding: 60px 0;
+    }
+    
+    .menu-column {
+        margin-bottom: 30px;
+    }
+}
+/* Reservation Section Styles */
+.reservation-section {
+  position: relative;
+  padding: 80px 0;
+  color: #fff;
+}
+
+.reservation-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(228, 192, 157, 0.797);
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.reservation-input:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #d4af37;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+}
+
+.reservation-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-select.reservation-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23d4af37' d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.btn-reservation {
+  background-color: #d4af37;
+  color: #000;
+  font-weight: 700;
+  padding: 12px 40px;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+}
+
+.btn-reservation:hover {
+  background-color: #c9a227;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reservation-section {
+    padding: 60px 0;
+  }
+  
+  .reservation-input {
+    padding: 10px 12px;
+  }
+  
+  .btn-reservation {
+    padding: 10px 30px;
+  }
+}
+/* Testimonial Section Styles */
+.testimonial-section {
+  padding: 80px 0;
+}
+
+.testimonial-card {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.testimonial-img img {
+  border: 2px solid #d4af37;
+  padding: 3px;
+}
+
+.testimonial-text {
+  color: #666;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .testimonial-section {
+    padding: 60px 0;
+  }
+  
+  .testimonial-card {
+    margin-bottom: 30px;
+  }
+}
+/* Footer Section Styles */
+.footer-section {
+  padding: 60px 0 30px;
+}
+
+.footer-section a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #d4af37;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-section {
+    text-align: center;
+  }
+  
+  .footer-contact ul {
+    display: inline-block;
+    text-align: left;
+  }
+  
+  .map-container {
+    margin-bottom: 30px;
+  }
+}
+/* Blur effect for mobile menu */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999;
+        padding: 20px;
+        margin-top: 60px; /* Adjust based on your navbar height */
+    }
+    
+    .navbar-nav {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .nav-link {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    /* Style the close button (optional) */
+    .navbar-toggler[aria-expanded="true"] {
+        position: relative;
+        z-index: 1000;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                The Dine Spot
+                <span class="logo-sub">R E S T A U R A N T</span>
+            </a>
+            <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">SERVICES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#menu">MENU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">CONTACT</a>
+                    </li>
+                </ul>
+                <a href="#" class="reservation-box ms-lg-4">
+                    Reservations: +91 586 778 8892
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <p class="experience-text" style=" font-family: 'Ephesis'; font-size: 50px;">The Dine Spot is</p>
+            <h1 class="title">An Extraordinary Experience</h1>
+            <div class="divider"></div>
+            <p class="content-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Items Section -->
+   <!-- Menu Items Section -->
+<section class="menu-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dmVnZXRhcmlhbiUyMGZvb2R8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Vegetable Lasagna" class="menu-item-img">
+                    <h3 class="menu-title">Vegetable Lasagna</h3>
+                    <p class="menu-ingredients">Zucchini, Eggplant, Tomato, Cheese</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHZlZ2V0YXJpYW4lMjBmb29kfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Stuffed Bell Peppers" class="menu-item-img">
+                    <h3 class="menu-title">Stuffed Bell Peppers</h3>
+                    <p class="menu-ingredients">Bell Peppers, Quinoa, Spices</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHZlZ2V0YXJpYW4lMjBmb29kfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Mushroom Risotto" class="menu-item-img">
+                    <h3 class="menu-title">Mushroom Risotto</h3>
+                    <p class="menu-ingredients">Arborio Rice, Mushrooms, White Wine, Herbs</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHZlZ2V0YXJpYW4lMjBmb29kfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Buddha Bowl" class="menu-item-img">
+                    <h3 class="menu-title">Buddha Bowl</h3>
+                    <p class="menu-ingredients">Quinoa, Avocado, Greens</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="feliciano-section py-5" style="background-color: #f8f9fa; color: #333;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="position-relative">
+                    <h2 class="display-4 mb-4 position-relative z-index-1" style="font-family: 'Playfair Display', serif;  color: #d4af37;letter-spacing: 5px;">The Dine Spot Restaurant</h2>
+                    <span class="position-absolute top-0 start-0 translate-middle-y ephesis-text" style="font-family: 'Ephesis', cursive; font-size: 6rem; color: rgba(212, 175, 55, 0.2); z-index: 0;">About</span>
+                </div>
+                <p class="lead mb-4">We don't just make coffee; we create memories. Our journey began in 2020 with a simple dream: to create a place where people could relax and enjoy a genuinely good cup of coffee.
+
+                    We source the finest beans from local roasters and prepare each cup with love and precision. Come, be a part of our story.</p>
+                
+                <div class="d-flex flex-column">
+                    <div class="mb-3">
+                        <h5 class="mb-1" style="font-family: 'Playfair Display', serif;">Opening Hours</h5>
+                        <p class="mb-0">Mon - Fri 8 AM - 11 PM</p>
+                    </div>
+                    <div>
+                        <h5 class="mb-1" style="font-family: 'Playfair Display', serif;">Phone</h5>
+                        <p class="mb-0">+91-978-123-4567</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="Restaurant Interior" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section -->
+
+<section id="services"  class="services-section py-5" style="background-color: #fff;">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 text-center position-relative">
+                <h2 class="mb-3" style="font-family: 'Playfair Display', serif; font-size: 2.5rem;">Services</h2>
+                <div class="position-relative">
+                    <h2 class="mb-4 position-relative z-index-1" style="font-family: 'Playfair Display', serif; color: #d4af37; font-size: 50px; font-weight: 700;letter-spacing: 5px;">Catering Services</h2>
+                    <span class="position-absolute top-0 start-50 translate-middle ephesis-text" style="font-family: 'Ephesis', cursive; font-size: 6rem; color: rgba(212, 175, 55, 0.2); z-index: 0; white-space: nowrap;">Services</span>
+                </div>
+                <div class="divider mx-auto" style="width: 100px; height: 2px; background-color: #d4af37;"></div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Birthday Party -->
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="service-card text-center p-4">
+                    <div class="service-icon mb-4">
+                        <i class="fas fa-birthday-cake fa-3x" style="color: #d4af37;"></i>
+                    </div>
+                    <h4 class="mb-3" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;">Birthday Party</h4>
+                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                </div>
+            </div>
+            
+            <!-- Business Meetings -->
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="service-card text-center p-4">
+                    <div class="service-icon mb-4">
+                        <i class="fas fa-briefcase fa-3x" style="color: #d4af37;"></i>
+                    </div>
+                    <h4 class="mb-3" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;">Business Meetings</h4>
+                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                </div>
+            </div>
+            
+            <!-- Wedding Party -->
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <div class="service-icon mb-4">
+                        <i class="fas fa-glass-cheers fa-3x" style="color: #d4af37;"></i>
+                    </div>
+                    <h4 class="mb-3" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;">Wedding Party</h4>
+                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Menu Section -->
+<!-- Compact Menu Section -->
+<section id="menu" class="compact-menu-section py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4" style="font-family: 'Playfair Display', serif; font-size: 50px; font-weight: 700; letter-spacing: 5px;color: #d4af37;">THE MENU</h2>
+                <div class="divider mx-auto mb-4" style="width: 100px; height: 2px; background-color: #d4af37;"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Starters Column -->
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="menu-column p-4">
+                    <h3 class="text-center mb-4" style="font-family: 'Playfair Display', serif; color: #d4af37; font-size: 1.5rem;">STARTERS</h3>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Bruschetta</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹120</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Spinach Artichoke Dip</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Stuffed Mushrooms</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Caprese Salad</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Column -->
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="menu-column p-4">
+                    <h3 class="text-center mb-4" style="font-family: 'Playfair Display', serif; color: #d4af37; font-size: 1.5rem;">MAIN</h3>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Eggplant Parmesan</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Vegetable Paella</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Mushroom Risotto</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Vegetable Curry</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desserts Column -->
+            <div class="col-md-4">
+                <div class="menu-column p-4">
+                    <h3 class="text-center mb-4" style="font-family: 'Playfair Display', serif; color: #d4af37; font-size: 1.5rem;">DESSERTS</h3>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Chocolate Lava Cake</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Tiramisu</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Fruit Tart</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="d-flex justify-content-between">
+                            <span style="font-family: 'Playfair Display', serif;">Crème Brûlée</span>
+                            <span style="color: #d4af37; font-weight: 700;">₹140</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Reservation Section -->
+<section class="reservation-section py-7 py-md-9" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'); background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 text-center">
+          <!-- Heading -->
+          <h2 class="mb-2" style="font-family: 'Playfair Display', serif; color: #fff; font-size: 2.5rem;">Make Online Reservation</h2>
+  
+          <!-- Subheading -->
+          <p class="mb-6" style="color: #aaa; font-family: 'Roboto Condensed', sans-serif;">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-lg-center">
+        <div class="col-lg-8">
+          <!-- Form -->
+          <form>
+            <div class="row gx-3">
+              <div class="col-md-6">
+                <!-- Contact number (hidden) -->
+                <input type="hidden" name="contact_number" />
+  
+                <!-- Full name -->
+                <div class="mb-4">
+                  <label class="visually-hidden" for="user_name">Full name</label>
+                  <input
+                    class="form-control reservation-input"
+                    id="user_name"
+                    name="user_name"
+                    type="text"
+                    placeholder="Full name"
+                    required=""
+                  />
+                </div>
+  
+                <!-- Phone number -->
+                <div class="mb-4">
+                  <label class="visually-hidden" for="user_phone">Phone number</label>
+                  <input
+                    class="form-control reservation-input"
+                    id="user_phone"
+                    name="user_phone"
+                    type="tel"
+                    placeholder="Phone number"
+                    required=""
+                  />
+                </div>
+  
+                <!-- Email address -->
+                <div class="mb-4">
+                  <label class="visually-hidden" for="user_email">Email address</label>
+                  <input
+                    class="form-control reservation-input"
+                    id="user_email"
+                    name="user_email"
+                    type="email"
+                    placeholder="Email address"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- Guests -->
+                <div class="mb-4">
+                  <label class="visually-hidden" for="guests">Guests</label>
+                  <select
+                    class="form-select reservation-input"
+                    id="guests"
+                    name="guests"
+                    required=""
+                  >
+                    <option value="1">1 person</option>
+                    <option value="2" selected="">2 persons</option>
+                    <option value="3">3 persons</option>
+                    <option value="4">4 persons</option>
+                    <option value="5">5 persons</option>
+                  </select>
+                </div>
+  
+                <!-- Date -->
+                <div class="mb-4">
+                  <label class="visually-hidden" for="date">Date</label>
+                  <input
+                    class="form-control reservation-input"
+                    id="date"
+                    name="date"
+                    type="date"
+                    value="2025-08-13"
+                    required=""
+                  />
+                </div>
+  
+                <!-- Time -->
+<div class="mb-4">
+    <label class="visually-hidden" for="time">Time</label>
+    <select
+      class="form-select reservation-input"
+      id="time"
+      name="time"
+      required=""
+    >
+      <option value="1">11:00 AM</option>
+      <option value="2" selected="">12:00 AM</option>
+      <option value="3">1:00 PM</option>
+      <option value="4">6:00 PM</option>
+      <option value="5">7:00 PM</option>
+    </select>
+  </div>
+  </div> <!-- Close the col-md-6 div here -->
+  <div class="col-12 text-center mt-3">
+    <!-- Button -->
+    <button
+      class="btn btn-reservation"
+      type="submit"
+    >
+      Reserve a table
+    </button>
+  </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+<section class="testimonial-section py-7 py-md-9" style="background-color: #f8f9fa;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 text-center">
+          <!-- Heading -->
+          <h2 class="mb-2" style="font-family: 'Playfair Display', serif;font-size: 50px; font-weight: 700; color: #d4af37; letter-spacing: 5px;">What Our Guests Say</h2>
+          
+          <!-- Subheading -->
+          <div class="divider mx-auto mb-4" style="width: 100px; height: 2px; background-color: #d4af37;"></div>
+          <p class="mb-6" style="color: #666; font-family: 'Roboto Condensed', sans-serif;">
+            Hear from our valued guests about their dining experiences
+          </p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <!-- Testimonial 1 -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="testimonial-card p-4 text-center">
+            <div class="testimonial-img mb-3">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle" width="80" alt="Guest">
+            </div>
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+            </div>
+            <p class="testimonial-text mb-4" style="font-style: italic;">
+              "The food was absolutely exquisite! Every dish was a masterpiece. The service was impeccable and the ambiance was perfect for our anniversary dinner."
+            </p>
+            <h5 class="testimonial-name" style="font-family: 'Playfair Display', serif; color: #000;">Sarah Johnson</h5>
+            <p class="testimonial-role" style="color: #d4af37;">Food Critic</p>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="testimonial-card p-4 text-center">
+            <div class="testimonial-img mb-3">
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle" width="80" alt="Guest">
+            </div>
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+            </div>
+            <p class="testimonial-text mb-4" style="font-style: italic;">
+              "I've dined at many restaurants around the world, but The Venue stands out. The chef's tasting menu was an unforgettable culinary journey."
+            </p>
+            <h5 class="testimonial-name" style="font-family: 'Playfair Display', serif; color: #000;">Michael Chen</h5>
+            <p class="testimonial-role" style="color: #d4af37;">Travel Blogger</p>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="col-md-4">
+          <div class="testimonial-card p-4 text-center">
+            <div class="testimonial-img mb-3">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle" width="80" alt="Guest">
+            </div>
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star" style="color: #d4af37;"></i>
+              <i class="fas fa-star-half-alt" style="color: #d4af37;"></i>
+            </div>
+            <p class="testimonial-text mb-4" style="font-style: italic;">
+              "Perfect spot for our business dinner. The private dining area was elegant, and the wine pairing suggestions were spot on. Will definitely return!"
+            </p>
+            <h5 class="testimonial-name" style="font-family: 'Playfair Display', serif; color: #000;">Emily Rodriguez</h5>
+            <p class="testimonial-role" style="color: #d4af37;">Corporate Client</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer Section -->
+<footer id="contact" class="footer-section py-5" style="background-color: #111;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="footer-brand">
+            <h2 class="mb-2" style="font-family: 'Playfair Display', serif; color: #d4af37; font-size: 2rem;">The Dine Spot</h2>
+            <p class="mb-3" style="font-family: 'Roboto Condensed', sans-serif; color: #fff; letter-spacing: 4px; font-size: 12px;">R E S T A U R A N T</p>
+            <p class=" small"  style="font-family: 'Roboto Condensed', sans-serif; color: #aaa; font-size: 12px;" >Copyright ©2025 All rights reserved. Made with <span style="color: #d4af37;">♥</span> by Shriya.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <!-- Map Embed -->
+          <div class="map-container" style="height: 200px; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; overflow: hidden;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3258.454012143083!2d-120.73191892422664!3d35.18077237267153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ec1c1c3f22f8f5%3A0x1b5a1a9b9b9b9b9b!2s481%20Creelside%20Ln%2C%20Avila%20Beach%2C%20CA%2093424%2C%20USA!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy"></iframe>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="footer-contact">
+            <h5 class="mb-3" style="font-family: 'Playfair Display', serif; color: #d4af37;">Contact Us</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-map-marker-alt me-2" style="color: #d4af37;"></i>
+                <span style="color: #aaa;">481 Nagpur, India</span>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-phone-alt me-2" style="color: #d4af37;"></i>
+                <span style="color: #aaa;">+91 345 7953 32453</span>
+              </li>
+              <li>
+                <i class="fas fa-envelope me-2" style="color: #d4af37;"></i>
+                <span style="color: #aaa;">thedinespot@gmail.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="footer-divider" style="height: 1px; background-color: rgba(255,255,255,0.1);"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+            }
+        });
+    </script>
+</body>
+</html>
